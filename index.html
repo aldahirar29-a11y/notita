@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para mi doctora bonita 🤍</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Lora', serif;
+            background: linear-gradient(135deg, #fdf6f0 0%, #f5e6e0 25%, #e8d5d0 50%, #f0e6e0 75%, #fdf6f0 100%);
+            background-attachment: fixed;
+            color: #4a3f35;
+            line-height: 1.9;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            position: relative;
+        }
+
+        .header::before {
+            content: '✦';
+            display: block;
+            font-size: 2rem;
+            color: #c9a89a;
+            margin-bottom: 20px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-weight: 600;
+            color: #8b6f5c;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        .header .heart {
+            font-size: 3rem;
+            display: inline-block;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        .divider {
+            width: 120px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #c9a89a, transparent);
+            margin: 30px auto;
+            position: relative;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '♥';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #c9a89a;
+            font-size: 0.8rem;
+        }
+
+        .divider::before { left: -15px; }
+        .divider::after { right: -15px; }
+
+        .message-section {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 45px 40px;
+            margin-bottom: 35px;
+            box-shadow: 0 8px 32px rgba(139, 111, 92, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .message-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #d4a5a5, #c9a89a, #d4b5a5);
+            border-radius: 24px 24px 0 0;
+        }
+
+        .message-text {
+            font-size: 1.15rem;
+            line-height: 2.2;
+            color: #5a4a3f;
+            text-align: justify;
+        }
+
+        .message-text p {
+            margin-bottom: 1.5em;
+        }
+
+        .message-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        .photo-gallery {
+            display: grid;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .photo-gallery.single {
+            grid-template-columns: 1fr;
+            max-width: 500px;
+            margin: 30px auto;
+        }
+
+        .photo-gallery.triple {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .photo-gallery.double {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .photo-card {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(139, 111, 92, 0.15);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: white;
+            padding: 8px;
+        }
+
+        .photo-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(139, 111, 92, 0.2);
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 12px;
+            display: block;
+        }
+
+        .photo-frame {
+            position: absolute;
+            inset: 0;
+            border: 2px solid rgba(201, 168, 154, 0.3);
+            border-radius: 16px;
+            pointer-events: none;
+        }
+
+        .photo-label {
+            text-align: center;
+            margin-top: 12px;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: #a08070;
+            font-size: 0.95rem;
+        }
+
+        .quote-box {
+            background: linear-gradient(135deg, #f8f0eb 0%, #f0e6e0 100%);
+            border-left: 4px solid #c9a89a;
+            padding: 25px 30px;
+            margin: 30px 0;
+            border-radius: 0 16px 16px 0;
+            position: relative;
+            font-style: italic;
+            font-size: 1.2rem;
+            color: #6b5a4a;
+        }
+
+        .quote-box::before {
+            content: '"';
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: #c9a89a;
+            opacity: 0.3;
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            line-height: 1;
+        }
+
+        .closing {
+            text-align: center;
+            padding: 50px 20px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 24px;
+            margin-top: 20px;
+            position: relative;
+        }
+
+        .closing::before {
+            content: '✦ ✦ ✦';
+            display: block;
+            color: #c9a89a;
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            letter-spacing: 15px;
+        }
+
+        .closing-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: #8b6f5c;
+            line-height: 2;
+        }
+
+        .signature {
+            margin-top: 30px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: #a08070;
+            font-style: italic;
+        }
+
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .heart-particle {
+            position: absolute;
+            color: rgba(201, 168, 154, 0.15);
+            font-size: 1.5rem;
+            animation: float-up 15s linear infinite;
+        }
+
+        @keyframes float-up {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% {
+                transform: translateY(-100px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            14% { transform: scale(1.1); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.1); }
+            70% { transform: scale(1); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .stethoscope-icon {
+            font-size: 2rem;
+            color: #c9a89a;
+            margin: 20px 0;
+            display: block;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            .header h1 { font-size: 2rem; }
+            .message-section { padding: 30px 25px; }
+            .message-text { font-size: 1.05rem; }
+            .photo-gallery.triple { grid-template-columns: 1fr; }
+            .photo-gallery.double { grid-template-columns: 1fr; }
+            .photo-card img { height: 220px; }
+        }
+
+        .year-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #e8d5d0, #f0e0d8);
+            color: #8b6f5c;
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="floating-hearts" id="hearts"></div>
+
+    <div class="container">
+        
+        <!-- HEADER -->
+        <header class="header fade-in">
+            <h1>Hola doctora bonita <span class="heart">🤍</span></h1>
+            <div class="divider"></div>
+        </header>
+
+        <!-- PRIMER MENSAJE -->
+        <section class="message-section fade-in">
+            <div class="message-text">
+                <p>Te deseo lo mejor hoy. Sé que te preparaste mucho para este examen y todo el esfuerzo que has hecho. Hoy solo es un reto más que vas a superar y te irá súper bien. Confía en ti. Sé que quizá haya nervios, pero tranquila tú puedes. Quiero que sepas que estoy muy orgulloso de ti, de ver cómo poco a poco te conviertes en la doctora que sueñas ser.</p>
+                
+                <p>Sé que ha habido días difíciles, pero aun así aquí estás porque eres una personita muy inteligente, valiente y capaz de lograr todo lo que se propone.</p>
+                
+                <p>Te dejé unos recuerditos de cómo ha ido avanzando mi niña en su carrera. ❤️</p>
+            </div>
+        </section>
+
+        <!-- FOTO 1 -->
+        <section class="message-section fade-in">
+            <div class="photo-gallery single">
+                <div class="photo-card">
+                    <div class="photo-frame"></div>
+                    <img src="Foto 1.jpg" alt="Primera foto de mi doctora hermosa">
+                    <div class="photo-label">Primer año</div>
+                </div>
+            </div>
+            <div class="message-text" style="margin-top: 25px;">
+                <p>Esta es la primera fotito que tengo de mi doctora hermosa con su uniforme quirúrgico. Aquí ibas en primer año y empezaba este camino y el sueño de ser la mejor doctora.</p>
+            </div>
+        </section>
+
+        <!-- FOTOS 2, 3, 4 -->
+        <section class="message-section fade-in">
+            <div class="photo-gallery triple">
+                <div class="photo-card">
+                    <div class="photo-frame"></div>
+                    <img src="Foto 2.jpg" alt="Segundo año - foto 1">
+                </div>
+                <div class="photo-card">
+                    <div class="photo-frame"></div>
+                    <img src="Foto 3.jpg" alt="Segundo año - foto 2">
+                </div>
+                <div class="photo-card">
+                    <div class="photo-frame"></div>
+                    <img src="Foto 4.jpg" alt="Segundo año - foto 3">
+                </div>
+            </div>
+            <div class="message-text" style="margin-top: 25px;">
+                <p>Aquí está mi doctora bonita en segundo año. Estudiando mucho, haciendo prácticas, aprendiendo cada vez más y demostrando que podías con todo.</p>
+            </div>
+        </section>
+
+        <!-- FOTOS 5, 6 -->
+        <section class="message-section fade-in">
+            <div class="photo-gallery double">
+                <div class="photo-card">
+                    <div class="photo-frame"></div>
+                    <img src="Foto 5.jpg" alt="Tercer año - foto 1">
+                </div>
+                <div class="photo-card">
+                    <div class="photo-frame"></div>
+                    <img src="Foto 6.jpg" alt="Tercer año - foto 2">
+                </div>
+            </div>
+            <div class="message-text" style="margin-top: 25px;">
+                <p>Y estas fotitos son de mi doctora en tercer año. Aquí comenzó una etapa muy diferente en tu vida, con nuevos desafíos y nuevas cosas por vivir. Te adaptaste y de nuevo demostraste que tú puedes con todo</p>
+            </div>
+        </section>
+
+        <!-- MENSAJE DE REFLEXIÓN -->
+        <section class="message-section fade-in">
+            <div class="message-text">
+                <p>Voltea un momento hacia atrás y mira todo lo que has conseguido. Todo lo que has logrado y vivido gracias a tu esfuerzo, disciplina, dedicación y a que sabes lo que quieres. Siéntete orgullosa de la mujer en que te has convertido. No tienes comparación alguna, porque eres única Dany.</p>
+            </div>
+        </section>
+
+        <!-- FOTOS 7, 8 -->
+        <section class="message-section fade-in">
+            <div class="photo-gallery double">
+                <div class="photo-card">
+                    <div class="photo-frame"></div>
+                    <img src="Foto 7.jpg" alt="Nosotros - foto 1">
+                </div>
+                <div class="photo-card">
+                    <div class="photo-frame"></div>
+                    <img src="Foto 8.jpg" alt="Nosotros - foto 2">
+                </div>
+            </div>
+            <div class="message-text" style="margin-top: 25px;">
+                <p>Y por último unas fotitos de nosotros. De cómo empezamos y de dónde estamos ahora.</p>
+            </div>
+        </section>
+
+        <!-- MENSAJE FINAL -->
+        <section class="message-section fade-in">
+            <div class="message-text">
+                <p>Me siento muy agradecido de compartir este proceso contigo. De verte crecer, aprender, cumplir metas y acercarte cada vez más a tus sueños. Me llena de felicidad ver tu carita cuando te va bien en algo, o cuando aprendes algo nuevo.</p>
+                
+                <p>Quiero que sepas que me siento muy orgulloso de ti y que siempre voy a estar aquí para apoyarte. En los días buenos, en los difíciles, cuando todo salga bien y también cuando sientas que las cosas se complican. Cuentas conmigo incondicionalmente.</p>
+            </div>
+            
+            <div class="quote-box">
+                Hay una frase que me dijiste hace mucho y jamás la olvidare:<br>
+                "Entramos juntos y juntos salimos"<br>
+                Y así será porque somos un equipo.
+            </div>
+            
+            <div class="message-text">
+                <p>Mi niña, concéntrate mucho. No importa si te tardas más o si eres la última en salir. Lo que importa es que te sientas segura de ti, de lo que sabes y de todo lo que has estudiado. Sé que no es fácil, pero también sé perfectamente la niña que eres. Da lo mejor de ti y confía en ti, te va a ir bien.</p>
+                
+                <p>Vas a poder con esto y con mucho más.</p>
+            </div>
+        </section>
+
+        <!-- CIERRE -->
+        <section class="closing fade-in">
+            <div class="closing-text">
+                Mucha suerte doctora Dany.<br>
+                Te amo muchísimo.<br>
+                Y hoy más que nunca estoy orgulloso de ti mi bonita
+            </div>
+            <div class="signature">🤍</div>
+        </section>
+
+    </div>
+
+    <script>
+        // Generar corazones flotantes
+        const heartsContainer = document.getElementById('hearts');
+        const heartSymbols = ['🤍', '♥', '✦', '•'];
+        
+        for (let i = 0; i < 20; i++) {
+            const heart = document.createElement('div');
+            heart.className = 'heart-particle';
+            heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.animationDuration = (10 + Math.random() * 15) + 's';
+            heart.style.animationDelay = Math.random() * 15 + 's';
+            heart.style.fontSize = (0.8 + Math.random() * 1.5) + 'rem';
+            heartsContainer.appendChild(heart);
+        }
+
+        // Animación de entrada al scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationDelay = '0s';
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.message-section, .closing').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+
+</body>
+</html>
